@@ -19,5 +19,6 @@
 
   <depend>rospy</depend>
   <depend>atwork_ros_msgs</depend>
+  <exec_depend>mas_execution_manager</exec_depend>
 
 </package>
