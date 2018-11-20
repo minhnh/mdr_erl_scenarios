@@ -6,6 +6,7 @@ project(mdr_erl_scenarios)
 find_package(catkin REQUIRED COMPONENTS
   rospy
   roslint
+  atwork_ros_msgs
 )
 
 # setup Python package

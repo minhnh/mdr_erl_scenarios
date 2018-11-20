@@ -1,0 +1,5 @@
+- git:
+    local-name:i atwork_ros_msgs
+    uri: https://github.com/b-it-bots/atwork_ros_msgs.git
+    version: master
+
