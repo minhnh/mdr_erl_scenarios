@@ -7,6 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   roslint
   mas_execution_manager
+  mdr_demo_simple_pick_and_place
   atwork_ros_msgs
 )
 

@@ -1,0 +1,28 @@
+# Description: Defines a state machine for ERL FBM 1 task
+# Author: Minh Nguyen
+# Email: minh.nguyen@smail.inf.h-brs.de
+sm_id: erl_fbm1_perception
+states: [PERCEIVE_TABLE]
+outcomes: [DONE, FAILED, TIMEOUT]
+state_descriptions:
+    - state:
+        name: PERCEIVE_TABLE
+        state_module_name: mdr_demo_simple_pick_and_place.scenario_states.perceive_planes
+        state_class_name: PerceivePlanes
+        transitions:
+            - transition:
+                name: succeeded
+                state: DONE
+            - transition:
+                name: failed
+                state: PERCEIVE_TABLE
+            - transition:
+                name: failed_after_retrying
+                state: FAILED
+        arguments:
+            - argument:
+                name: number_of_retries
+                value: 3
+            - argument:
+                name: plane_prefix
+                value: table
