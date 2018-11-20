@@ -23,8 +23,9 @@ RUN git clone -b erl-2018 https://github.com/industrial-robotics/atwork_refbox_c
     git checkout erl-2018
 
 WORKDIR /root/catkin_ws/src/
-RUN git clone -b erl-2018 https://github.com/industrial-robotics/atwork_refbox_ros_client 
+RUN git clone -b erl-2018 https://github.com/industrial-robotics/atwork_refbox_ros_client
 
 WORKDIR /root/catkin_ws
 RUN [ "bash", "-c", ". /opt/ros/kinetic/setup.bash && rosdep update && rosdep install --from-paths src --ignore-src -r -y && catkin_make" ]
 
+CMD [ "bash", "-c", ". /opt/ros/kinetic/setup.bash && . devel/setup.bash && roslaunch atwork_refbox_ros_client robot_example_ros.launch" ]
