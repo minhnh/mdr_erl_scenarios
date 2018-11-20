@@ -1,0 +1,10 @@
+- git:
+    local-name: atwork_ros_msgs
+    uri: https://github.com/b-it-bots/atwork_ros_msgs.git
+    version: erl-2018
+
+- git:
+    local-name: mas_execution_manager
+    uri: https://github.com/b-it-bots/mas_execution_manager.git
+    version: master
+

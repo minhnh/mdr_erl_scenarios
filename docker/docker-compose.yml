@@ -1,10 +1,7 @@
 version: '3'
 services:
   refbox_client:
-    image: minhnh91/cfh_scenarios:latest
-    ports:
-     - "4446:4446/udp"
-    environment:
-     - ROS_MASTER_URI: http://something:11311
+    image: minhnh91/mdr_erl_scenarios:latest
+    network_mode: "host"
     volumes:
      - ./robot_example_ros.launch:/root/catkin_ws/src/atwork_refbox_ros_client/ros/launch/robot_example_ros.launch

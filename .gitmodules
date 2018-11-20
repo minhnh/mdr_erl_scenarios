@@ -1,3 +1,0 @@
-[submodule "atwork_ros_msgs"]
-	path = atwork_ros_msgs
-	url = https://github.com/b-it-bots/atwork_ros_msgs.git
