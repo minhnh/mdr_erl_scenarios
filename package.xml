@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>mdr_erl_scenarios</name>
+  <version>0.0.1</version>
+  <description>
+      package for interfacing between the Central Factory Hub (CFH) and @Home repositories,
+      using mas_execution_manager for state machine definition
+  </description>
+
+  <maintainer email="robotics@mail.inf.h-brs.de">MAS Robotics</maintainer>
+
+  <license>GPLv3</license>
+
+  <author email="minhnh.91@gmail.com">Minh Nguyen</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslint</build_depend>
+  <depend>rospy</depend>
+
+</package>
