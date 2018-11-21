@@ -20,5 +20,6 @@
   <depend>rospy</depend>
   <depend>atwork_ros_msgs</depend>
   <exec_depend>mas_execution_manager</exec_depend>
+  <exec_depend>mdr_demo_simple_pick_and_place</exec_depend>
 
 </package>

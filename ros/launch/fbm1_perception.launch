@@ -1,0 +1,18 @@
+<?xml version="1.0"?> 
+<launch>
+    <include file="$(find mdr_rosplan_interface)/ros/launch/rosplan.launch">
+        <arg name="data_path" value="$(find mdr_demo_simple_pick_and_place)/config/" />
+        <arg name="domain_path" value="$(find mdr_demo_simple_pick_and_place)/config/domain.pddl" />
+        <arg name="problem_path" value="$(find mdr_demo_simple_pick_and_place)/config/problem.pddl" />
+        <arg name="strl_file_path" value="$(find mdr_demo_simple_pick_and_place)/config/plan.strl" />
+    </include>
+
+    <!-- Actions -->
+    <include file="$(find mdr_perceive_plane_action)/ros/launch/perceive_plane.launch" />
+    <include file="$(find mdr_perceive_plane_action)/ros/launch/perceive_plane_client.launch" />
+
+    <!-- State machine -->
+    <node pkg="mas_execution_manager" type="state_machine_creator" name="fbm1_perception" output="screen">
+        <param name="sm_config_file" type="str" value="$(find mdr_erl_scenarios)/config/fbm1_perception_sm.yaml" />
+    </node>
+</launch>
