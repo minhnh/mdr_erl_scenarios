@@ -67,13 +67,13 @@ state_descriptions:
       transitions:
         - transition:
             name: succeeded
-            state: DONE
+            state: SEND_BENCHMARK_FB_EXEC
         - transition:
             name: failed
             state: PERCEIVE_TABLE
         - transition:
             name: failed_after_retrying
-            state: FAILED
+            state: SEND_BENCHMARK_FB_EXEC
       arguments:
         - argument:
             name: number_of_retries

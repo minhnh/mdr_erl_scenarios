@@ -3,8 +3,7 @@ import rospy
 from rosplan_knowledge_msgs.srv import GetAttributeServiceRequest
 from atwork_ros_msgs.msg import BenchmarkState, BenchmarkFeedback
 from mas_execution_manager.scenario_state_base import ScenarioStateBase
-from mcr_perception_msgs.msg import Object
-from mdr_perceive_plane_action.msg import PerceivePlaneAction
+from mcr_perception_msgs.msg import Object, DetectSceneAction
 
 
 class GetBenchmarkState(ScenarioStateBase):
@@ -92,7 +91,7 @@ class SendBenchmarkFeedback(ScenarioStateBase):
         self._retry_num = kwargs.get('number_of_retries', 0)
 
         # TODO: hack solution until skill status is implemented in the knowledge base
-        self._detection_client = actionlib.SimpleActionClient('/mas_perception/detect_image', PerceivePlaneAction)
+        self._detection_client = actionlib.SimpleActionClient('/mas_perception/detect_image', DetectSceneAction)
         self._benchmark_fb_pub = rospy.Publisher("/robot_example_ros/benchmark_feedback", BenchmarkFeedback)
 
     def _get_surface_objects(self, surface_prefix):
