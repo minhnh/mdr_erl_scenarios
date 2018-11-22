@@ -1,6 +1,7 @@
 # `mdr_erl_scenarios`
 package for interfacing between the Central Factory Hub (CFH) and b-it-bots@Home repositories, using
-`mas_execution_manager` for state machine definition.
+[`mas_execution_manager`](https://github.com/b-it-bots/mas_execution_manager) for state machine definition and
+execution.
 
 ## Starting a CFH client instance
 The file [`docker-compose.yml`](docker/docker-compose.yml) under the `docker` directory provide necessary configurations

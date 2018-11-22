@@ -2,27 +2,114 @@
 # Author: Minh Nguyen
 # Email: minh.nguyen@smail.inf.h-brs.de
 sm_id: erl_fbm1_perception
-states: [PERCEIVE_TABLE]
+states: [WAIT_BENCHMARK_STATE_PREP, SEND_BENCHMARK_FB_PREP, PERCEIVE_TABLE, SEND_BENCHMARK_FB_EXEC]
 outcomes: [DONE, FAILED, TIMEOUT]
 state_descriptions:
-    - state:
-        name: PERCEIVE_TABLE
-        state_module_name: mdr_demo_simple_pick_and_place.scenario_states.perceive_planes
-        state_class_name: PerceivePlanes
-        transitions:
-            - transition:
-                name: succeeded
-                state: DONE
-            - transition:
-                name: failed
-                state: PERCEIVE_TABLE
-            - transition:
-                name: failed_after_retrying
-                state: FAILED
-        arguments:
-            - argument:
-                name: number_of_retries
-                value: 3
-            - argument:
-                name: plane_prefix
-                value: table
+  - state:
+      name: WAIT_BENCHMARK_STATE_PREP
+      state_module_name: mdr_erl_scenarios.scenario_states
+      state_class_name: GetBenchmarkState
+      transitions:
+        - transition:
+            name: running_calibration
+            state: WAIT_BENCHMARK_STATE_PREP
+        - transition:
+            name: running_preparation
+            state: SEND_BENCHMARK_FB_PREP
+        - transition:
+            name: running_execution
+            state: PERCEIVE_TABLE
+        - transition:
+            name: paused
+            state: WAIT_BENCHMARK_STATE_PREP
+        - transition:
+            name: finished
+            state: DONE
+        - transition:
+            name: stopped
+            state: WAIT_BENCHMARK_STATE_PREP
+  - state:
+      name: SEND_BENCHMARK_FB_PREP
+      state_module_name: mdr_erl_scenarios.scenario_states
+      state_class_name: SendBenchmarkFeedback
+      transitions:
+      - transition:
+          name: done
+          state: PERCEIVE_TABLE
+      - transition:
+          name: timeout
+          state: SEND_BENCHMARK_FB_PREP
+      - transition:
+          name: retry
+          state: SEND_BENCHMARK_FB_PREP
+      - transition:
+          name: failed
+          state: WAIT_BENCHMARK_STATE_PREP
+      arguments:
+      # required
+      - argument:
+          name: scenario
+          value: fbm1
+      - argument:
+          name: phase
+          value: prep
+      # optional
+      - argument:
+          name: timeout
+          value: 20.0
+      - argument:
+          name: number_of_retries
+          value: 3
+  - state:
+      name: PERCEIVE_TABLE
+      state_module_name: mdr_demo_simple_pick_and_place.scenario_states.perceive_planes
+      state_class_name: PerceivePlanes
+      transitions:
+        - transition:
+            name: succeeded
+            state: SEND_BENCHMARK_FB_EXEC
+        - transition:
+            name: failed
+            state: PERCEIVE_TABLE
+        - transition:
+            name: failed_after_retrying
+            state: SEND_BENCHMARK_FB_EXEC
+      arguments:
+        - argument:
+            name: number_of_retries
+            value: 3
+        - argument:
+            name: plane_prefix
+            value: table
+  - state:
+      name: SEND_BENCHMARK_FB_EXEC
+      state_module_name: mdr_erl_scenarios.scenario_states
+      state_class_name: SendBenchmarkFeedback
+      transitions:
+      - transition:
+          name: done
+          state: WAIT_BENCHMARK_STATE_PREP
+      - transition:
+          name: timeout
+          state: SEND_BENCHMARK_FB_EXEC
+      - transition:
+          name: retry
+          state: SEND_BENCHMARK_FB_EXEC
+      - transition:
+          name: failed
+          state: WAIT_BENCHMARK_STATE_PREP
+      arguments:
+      # required
+      - argument:
+          name: scenario
+          value: fbm1
+      - argument:
+          name: phase
+          value: exec
+      # optional
+      - argument:
+          name: timeout
+          value: 20.0
+      - argument:
+          name: number_of_retries
+          value: 3
